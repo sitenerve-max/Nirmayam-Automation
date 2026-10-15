@@ -22,9 +22,9 @@ export default function Workflow() {
       />
 
       <Section title="Interactive workflow canvas" lead="Select a stage to inspect its trigger, automated actions, human responsibility, output and status.">
-        <FlowPlayground withSimulator={false} />
+        <FlowPlayground />
         <p className="muted">
-          Want to see it react? <Link href="/#flow">Run the scenario simulator on the overview</Link>.
+          Want to see it react? <Link href="/#try">Try a sample event on the overview</Link>.
         </p>
       </Section>
 

@@ -3,21 +3,29 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
-import { Boxes, HeartPulse, LayoutDashboard, Menu, Route, ShieldAlert, Users, Wallet, Workflow, X } from "lucide-react";
+import { Boxes, HeartPulse, LayoutDashboard, ListChecks, Menu, Route, Users, Wallet, Workflow, X } from "lucide-react";
 
-const nav = [
+const main = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
-  { href: "/workflow", label: "Workflow", icon: Workflow },
   { href: "/patient-flow", label: "Patient flow", icon: HeartPulse },
-  { href: "/team-operations", label: "Team operations", icon: Users },
-  { href: "/inventory", label: "Inventory", icon: Boxes },
+  { href: "/team-operations", label: "Team", icon: Users },
   { href: "/finance", label: "Finance", icon: Wallet },
-  { href: "/roadmap", label: "Roadmap", icon: Route },
+  { href: "/roadmap", label: "Implementation plan", icon: Route },
 ];
+const more = [
+  { href: "/workflow", label: "Detailed workflow", icon: Workflow },
+  { href: "/inventory", label: "Inventory", icon: Boxes },
+];
+const steps = ["Understand the idea", "Review the workflow", "Confirm requirements in a meeting"];
+
+const stepFor = (path: string) => (path === "/" ? 1 : path.startsWith("/roadmap") ? 3 : 2);
 
 export function Shell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const step = stepFor(pathname);
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  const moreActive = more.some((m) => isActive(m.href));
 
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
@@ -26,6 +34,15 @@ export function Shell({ children }: { children: ReactNode }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
+
+  const link = ({ href, label, icon: Icon }: (typeof main)[number]) => (
+    <li key={href}>
+      <Link href={href} aria-current={isActive(href) ? "page" : undefined} className={isActive(href) ? "is-active" : ""}>
+        <Icon size={18} aria-hidden="true" />
+        {label}
+      </Link>
+    </li>
+  );
 
   return (
     <div className="app">
@@ -36,28 +53,22 @@ export function Shell({ children }: { children: ReactNode }) {
         <div className="brand">
           <span className="brand-mark" aria-hidden="true">N</span>
           <span>
-            <strong>NIRAMAYAM CARE OS</strong>
-            <small>Business Automation Blueprint</small>
+            <strong>NIRAMAYAM PHYSIO</strong>
+            <small>Automation proposal by SiteNerve</small>
           </span>
         </div>
         <nav>
-          <ul>
-            {nav.map(({ href, label, icon: Icon }) => {
-              const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
-              return (
-                <li key={href}>
-                  <Link href={href} aria-current={active ? "page" : undefined} className={active ? "is-active" : ""}>
-                    <Icon size={18} aria-hidden="true" />
-                    {label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          <ul>{main.map(link)}</ul>
+          <details className="more" open={moreActive}>
+            <summary>
+              <ListChecks size={18} aria-hidden="true" /> View all modules
+            </summary>
+            <ul>{more.map(link)}</ul>
+          </details>
         </nav>
         <p className="by">
           by <strong>SiteNerve</strong>
-          <span>Concept prototype — not a live system</span>
+          <span>Concept proposal — not a live system</span>
         </p>
       </aside>
       {open ? <button className="scrim" aria-label="Close menu" onClick={() => setOpen(false)} /> : null}
@@ -67,18 +78,23 @@ export function Shell({ children }: { children: ReactNode }) {
           <button className="menu-btn" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen((v) => !v)}>
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
-          <p className="banner">
-            <ShieldAlert size={16} aria-hidden="true" />
-            Concept prototype — sample data only — final workflow will be confirmed with Niramayam.
+          <p className="stepper">
+            <span className="stepper-dots" aria-hidden="true">
+              {steps.map((s, i) => (
+                <i key={s} className={i + 1 <= step ? "on" : ""} />
+              ))}
+            </span>
+            <span>Step {step} of 3 — {steps[step - 1]}</span>
           </p>
+          <span className="sample-pill">Sample data only</span>
         </div>
         <main id="main">{children}</main>
         <footer className="foot">
           <p>
-            <strong>Security and privacy notice.</strong> This prototype uses fictional sample data. Before production use, the system requires secure
-            authentication, role-based permissions, backups, audit logs, privacy controls and approved messaging integrations.
+            <strong>Privacy and security.</strong> This prototype uses fictional sample data. Production use needs secure sign-in, role-based access, backups,
+            audit logs, privacy controls and approved messaging integrations.
           </p>
-          <p>Clinical decisions remain with qualified physiotherapists. This is a concept proposal, not a final quotation or production system.</p>
+          <p>Automation organises the work. Qualified physiotherapists remain responsible for clinical decisions.</p>
         </footer>
       </div>
     </div>

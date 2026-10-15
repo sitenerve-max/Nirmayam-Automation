@@ -1,4 +1,4 @@
-// All values in this file are fictional sample data for a concept prototype.
+// Detailed workflow stages. Fictional sample data for a concept prototype.
 
 export type Stage = {
   id: string;
@@ -44,7 +44,7 @@ export const stages: Stage[] = [
   },
   {
     id: "plan",
-    name: "Treatment Plan",
+    name: "Treatment plan",
     trigger: "Therapist saves a treatment plan",
     actions: ["Create plan milestones", "Schedule review dates", "Link package to the plan"],
     human: ["Define the plan and number of sessions", "Explain the plan to the patient"],
@@ -54,7 +54,7 @@ export const stages: Stage[] = [
   },
   {
     id: "sessions",
-    name: "Session Tracking",
+    name: "Session tracking",
     trigger: "Patient attends or misses a session",
     actions: ["Mark attendance", "Update package balance", "Log consumables used", "Flag missed visits"],
     human: ["Confirm session notes", "Decide on rescheduling"],
@@ -84,104 +84,12 @@ export const stages: Stage[] = [
   },
   {
     id: "report",
-    name: "Owner Report",
+    name: "Owner report",
     trigger: "Month end or owner request",
     actions: ["Roll up collections and expenses", "Summarise attendance and stock", "Compile follow-up results"],
     human: ["Review figures", "Decide next actions"],
     owner: "Owner",
     output: "One-page monthly report for the owner",
     status: "Draft for the month",
-  },
-];
-
-export type Scenario = {
-  id: string;
-  label: string;
-  stageId: string;
-  trigger: string;
-  steps: string[];
-  role: string;
-  nextAction: string;
-  stageStatus: string;
-  message: string;
-};
-
-export const scenarios: Scenario[] = [
-  {
-    id: "enquiry",
-    label: "New patient enquiry",
-    stageId: "enquiry",
-    trigger: "Sample enquiry arrives from Instagram: “Do you have a slot this week?”",
-    steps: ["Enquiry record created", "Front-desk owner assigned", "Available slot suggested", "Reminder task created"],
-    role: "Front desk",
-    nextAction: "Confirm patient details and approve the reply",
-    stageStatus: "New enquiry logged",
-    message: "Enquiry captured and assigned. Reply is waiting for staff approval.",
-  },
-  {
-    id: "missed",
-    label: "Patient misses appointment",
-    stageId: "followup",
-    trigger: "Sample patient is not marked present within 15 minutes of the slot",
-    steps: ["Session marked as missed", "Patient added to missed-visit queue", "Reschedule message drafted", "Package balance left unchanged"],
-    role: "Clinic manager",
-    nextAction: "Review and approve the drafted message",
-    stageStatus: "Missed visit queued",
-    message: "Missed visit flagged. Message ready for approval — nothing was sent.",
-  },
-  {
-    id: "checkin",
-    label: "Staff checks in",
-    stageId: "sessions",
-    trigger: "Sample therapist taps check-in at 08:52",
-    steps: ["Attendance recorded", "Shift matched to roster", "Therapist marked available for bookings", "Late-mark rule checked"],
-    role: "Physiotherapist",
-    nextAction: "None — on time, schedule is open",
-    stageStatus: "Therapist on duty",
-    message: "Check-in recorded on time. Calendar availability updated.",
-  },
-  {
-    id: "leave",
-    label: "Staff applies for leave",
-    stageId: "appointment",
-    trigger: "Sample staff member requests 2 days of leave",
-    steps: ["Leave request logged", "Booked appointments in the range found", "Approver notified in the app", "Payroll input held until decision"],
-    role: "Clinic manager",
-    nextAction: "Approve or reject, then reassign affected slots",
-    stageStatus: "Slots at risk — leave pending",
-    message: "Leave request is awaiting approval. 3 appointments may need reassignment.",
-  },
-  {
-    id: "stock",
-    label: "Inventory reaches reorder level",
-    stageId: "sessions",
-    trigger: "Sample stock of electrode pads drops to the reorder level",
-    steps: ["Low-stock flag raised", "Usual vendor looked up", "Purchase request drafted", "Approval task created"],
-    role: "Clinic manager",
-    nextAction: "Approve the purchase request",
-    stageStatus: "Low stock — purchase drafted",
-    message: "Purchase request drafted and waiting for approval. No order was placed.",
-  },
-  {
-    id: "expense",
-    label: "Expense is added",
-    stageId: "report",
-    trigger: "Sample expense entered: clinic supplies",
-    steps: ["Expense recorded with category", "Monthly operating expense updated", "Estimated profit recalculated", "Entry added to audit trail"],
-    role: "Finance/admin",
-    nextAction: "Attach the bill and mark as verified",
-    stageStatus: "Expenses updated",
-    message: "Expense logged. Prototype estimate for operating profit recalculated.",
-  },
-  {
-    id: "report",
-    label: "Monthly report generated",
-    stageId: "report",
-    trigger: "Sample month-end schedule reached",
-    steps: ["Collections totalled", "Expenses and salary inputs summed", "Stock and attendance summarised", "Follow-up results compiled"],
-    role: "Owner",
-    nextAction: "Review the report and note decisions",
-    stageStatus: "Report ready for review",
-    message: "Monthly owner report generated from sample data.",
   },
 ];

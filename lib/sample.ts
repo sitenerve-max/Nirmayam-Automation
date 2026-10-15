@@ -117,10 +117,11 @@ export const followUpQueues = [
 ];
 
 export const phases = [
-  { tag: "Phase 1", name: "Foundation", items: ["Enquiry capture", "Appointment calendar", "Therapist assignment", "Reminders", "Front-desk workflow"] },
-  { tag: "Phase 2", name: "Care and people", items: ["Assessment templates", "Treatment-plan tracking", "Staff attendance", "Leave management", "Payroll inputs"] },
-  { tag: "Phase 3", name: "Business control", items: ["Inventory", "Purchase requests", "Collections", "Expenses", "Owner reports"] },
-  { tag: "Phase 4", name: "Retention", items: ["Missed-visit follow-up", "Feedback", "Approved review requests", "Progress reminders", "Patient reactivation"] },
+  { tag: "Phase 1", name: "Patient enquiries and appointments", items: ["Enquiry capture", "Appointment calendar", "Therapist assignment", "Reminder preparation", "Front-desk status", "Basic owner report"] },
+  { tag: "Phase 2", name: "Staff attendance and leave", items: ["Check-in and check-out", "Leave approvals", "Late-mark alerts", "Monthly payroll summary"] },
+  { tag: "Phase 3", name: "Inventory and purchase requests", items: ["Stock list and reorder levels", "Low-stock alerts", "Purchase requests", "Stock history"] },
+  { tag: "Phase 4", name: "Expenses and monthly profit", items: ["Expense categories", "Collections and pending payments", "Monthly profit view", "Full owner report"] },
+  { tag: "Phase 5", name: "Follow-up and retention", items: ["Missed-visit follow-up", "Progress reminders", "Feedback requests", "Approved review requests"] },
 ];
 
 export const discoveryQuestions = [

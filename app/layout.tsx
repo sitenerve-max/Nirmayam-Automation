@@ -3,8 +3,8 @@ import { Shell } from "@/components/Shell";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Niramayam Care OS — Business Automation Blueprint by SiteNerve",
-  description: "Concept prototype with sample data: how Niramayam Physio & Rehabilitation Centre could run with less manual work.",
+  title: "Niramayam Physio × SiteNerve — Automation Proposal",
+  description: "Concept proposal with sample data: how Niramayam Physio & Rehabilitation Centre could run with less manual follow-up.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
