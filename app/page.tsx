@@ -27,12 +27,15 @@ export default function Overview() {
           <p className="lead">
             SiteNerve can connect patient enquiries, appointments, staff attendance, inventory, expenses and follow-ups into one simple system.
           </p>
+          <p className="hero-support">
+            Tell us how your clinic works. We will use your answers to design an automation plan around your actual operations.
+          </p>
           <div className="actions">
-            <a className="btn btn-primary btn-lg" href="#journey">
-              See how the clinic workflow works <ArrowRight size={16} aria-hidden="true" />
-            </a>
-            <a className="btn btn-outline btn-lg" href="#discovery">
-              Discuss it in 15 minutes
+            <Link className="btn btn-accent btn-lg" href="/workflow-intake">
+              Map Your Hospital Workflow <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+            <a className="btn btn-outline btn-lg" href="#journey">
+              See how the clinic workflow works
             </a>
           </div>
           <p className="demo-badge">Concept proposal — sample data only — not a live production system.</p>
@@ -152,6 +155,22 @@ export default function Overview() {
         </div>
         <p className="muted">Final phase selection will be confirmed after the discovery meeting. <Link href="/roadmap">See the full implementation plan</Link>.</p>
       </Section>
+
+      <section className="intake-band" aria-labelledby="intake-band-title">
+        <div className="intake-band-side">
+          <p className="eyebrow">Discovery questionnaire</p>
+          <h2 id="intake-band-title">Map your hospital workflow.</h2>
+        </div>
+        <div className="intake-band-side">
+          <p>
+            Ten short sections about enquiries, treatment, staff, stock, billing and follow-ups. Your answers become a first sketch of your own automation
+            map. Saved on your device only. Nothing is sent.
+          </p>
+          <Link className="btn btn-accent btn-lg" href="/workflow-intake">
+            Map Your Hospital Workflow <ArrowRight size={16} aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
 
       <DiscoveryCta />
     </>
